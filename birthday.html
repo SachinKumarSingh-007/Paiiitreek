@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Happy Birthday — Pratik Bhadwe 🎉</title>
+<style>
+/* ========= THEME & RESET ========= */
+:root{
+  --bg-1: #fff5f6;
+  --bg-2: #fff0e6;
+  --accent: #ff3b5c;
+  --accent-dark: #e23a50;
+  --muted: #666;
+  --card-bg: rgba(255,255,255,0.96);
+  --glass: rgba(255,255,255,0.55);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: radial-gradient(900px 420px at 10% 10%, #fff8fa 0%, transparent 15%),
+              radial-gradient(900px 420px at 90% 90%, #fff9f1 0%, transparent 12%),
+              linear-gradient(135deg,var(--bg-1),var(--bg-2));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  overflow:hidden;
+  color:#111;
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+}
+
+/* ====== LAYOUT ====== */
+.container{
+  width:min(1100px,96vw);
+  height:min(820px,94vh);
+  display:grid;
+  grid-template-columns: 1fr 380px;
+  gap:22px;
+  align-items:center;
+  z-index:10;
+  padding:18px;
+}
+@media (max-width:980px){
+  .container{ grid-template-columns: 1fr; height:auto; padding:12px; gap:14px; }
+}
+
+/* ====== LEFT HERO PANEL ====== */
+.hero {
+  position:relative;
+  border-radius:20px;
+  padding:28px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.72));
+  box-shadow: 0 18px 50px rgba(0,0,0,0.10);
+  overflow:hidden;
+  min-height:540px;
+}
+.hero-inner{ max-width:920px; margin:0 auto; text-align:center; position:relative; z-index:3; }
+.title{
+  font-weight:800;
+  color:var(--accent);
+  font-size:2.6rem;
+  letter-spacing:0.2px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+}
+.title .name{ color:#ff1f45; font-weight:900; font-size:2.8rem; text-shadow: 0 10px 26px rgba(255,75,92,0.12); }
+@media (max-width:520px){ .title{ font-size:1.3rem } .title .name{ font-size:1.45rem } }
+
+.subtitle{ margin-top:12px; color:#333; font-size:1.05rem; max-width:62ch; margin-left:auto; margin-right:auto; }
+
+/* CTA row */
+.cta {
+  margin-top:20px;
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.btn {
+  background:linear-gradient(180deg,var(--accent),var(--accent-dark));
+  color:#fff;
+  border:none;
+  padding:12px 16px;
+  border-radius:12px;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 8px 26px rgba(255,75,92,0.12);
+  transition: transform .16s ease, box-shadow .16s ease, opacity .12s;
+}
+.btn.secondary{
+  background:transparent; color:var(--accent); border:2px solid rgba(255,75,92,0.08); box-shadow:none; font-weight:800;
+}
+.btn:active{ transform: translateY(2px) }
+.small{ font-size:0.92rem; padding:8px 12px; border-radius:10px; }
+
+/* little note */
+.note{ margin-top:10px; color:var(--muted); font-size:0.95rem }
+
+/* ====== RIGHT CONTROL PANEL ====== */
+.controls {
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  align-items:stretch;
+  padding:18px;
+  border-radius:16px;
+  background: rgba(255,255,255,0.96);
+  box-shadow: 0 14px 40px rgba(0,0,0,0.06);
+  min-height:420px;
+}
+.controls h3{ font-size:1.05rem; margin-bottom:6px; font-weight:800; color:#111 }
+
+/* audio card */
+.audio-card{
+  padding:12px;
+  border-radius:12px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.6));
+  border:1px solid rgba(0,0,0,0.03);
+  display:flex; flex-direction:column; gap:10px;
+}
+.audio-row{ display:flex; gap:8px; align-items:center; }
+.icon{
+  width:46px;height:46px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(180deg,#fff,#fff);box-shadow:0 6px 18px rgba(0,0,0,0.05);
+}
+.seek{ flex:1; display:flex; gap:10px; align-items:center; }
+.seek input[type="range"]{ width:100%; -webkit-appearance:none; appearance:none; height:8px; border-radius:8px; background:linear-gradient(90deg,#ffd6dc,#c4f3e6); outline:none;}
+.seek input[type="range"]::-webkit-slider-thumb{ -webkit-appearance:none; width:16px; height:16px; border-radius:50%; background:#fff; border:3px solid var(--accent); box-shadow:0 6px 12px rgba(0,0,0,0.12) }
+.vol-row { display:flex; gap:8px; align-items:center; }
+
+/* small controls group */
+.group { display:flex; gap:8px; flex-wrap:wrap; align-items:center }
+
+/* share box */
+.share {
+  display:flex; gap:8px; align-items:center;
+  background:linear-gradient(180deg, rgba(255,255,255,0.88), rgba(255,255,255,0.7));
+  padding:10px; border-radius:10px;
+}
+.share input{ flex:1; padding:8px 10px; border-radius:8px; border:1px solid rgba(0,0,0,0.06) }
+
+/* footer */
+.footer { text-align:center; font-size:0.9rem; color:var(--muted); margin-top:6px }
+
+/* ====== BALLOONS: base style; others created dynamically ====== */
+.balloon{
+  position:absolute;
+  bottom:-260px;
+  width:78px; height:100px; border-radius:50%;
+  display:grid; place-items:center; color:#fff; font-weight:800;
+  box-shadow:0 18px 40px rgba(0,0,0,0.12);
+  cursor:pointer; transform-origin:center;
+  transition: transform .45s cubic-bezier(.17,.93,.32,1), opacity .25s;
+}
+.balloon .tie{ position:absolute; bottom:-42px; left:50%; transform:translateX(-50%); width:2px; height:60px; background:rgba(0,0,0,0.35); border-radius:3px; }
+
+/* pop class */
+.pop {
+  transform: scale(0.04) rotateZ(30deg) !important;
+  opacity:0 !important;
+  pointer-events:none;
+}
+
+/* confetti canvas sits above content */
+#confettiCanvas{
+  position:fixed; inset:0; z-index:120; pointer-events:none;
+}
+
+/* fireworks canvas on top */
+#fxCanvas{
+  position:fixed; inset:0; z-index:130; pointer-events:none;
+}
+
+/* small accessibility focus */
+[tabindex]{ outline:none }
+[tabindex]:focus{ box-shadow:0 0 0 3px rgba(255,75,92,0.16); border-radius:8px }
+
+/* help bubble */
+.hint{ font-size:0.9rem; color:var(--muted) }
+/* decorative orbs */
+.orb { position:fixed; border-radius:50%; filter:blur(48px); opacity:0.85; pointer-events:none; z-index:0 }
+.orb.o1{ width:580px;height:580px; left:-110px; top:-80px; background:linear-gradient(180deg,#ffdce0,#ffb6c1) }
+.orb.o2{ width:420px;height:420px; right:-80px; bottom:-120px; background:linear-gradient(180deg,#d3f7ee,#b6fff0) }
+
+/* mobile tweaks */
+@media (max-width:760px){
+  .controls{ padding:12px }
+  .container{ grid-template-columns: 1fr; gap:12px; }
+  .hero{ padding:18px }
+}
+</style>
+</head>
+<body>
+  <div class="orb o1" aria-hidden="true"></div>
+  <div class="orb o2" aria-hidden="true"></div>
+
+  <div class="container" role="main" aria-label="Birthday card for Pratik Bhadwe">
+    <main class="hero" aria-label="Greeting area">
+      <div class="hero-inner">
+        <div class="title" id="greetingTitle" tabindex="0" role="heading" aria-level="1">
+          <span class="spark">🎉</span>
+          <span class="name">Pratik Bhadwe</span>
+          <span>— Happy Birthday</span>
+        </div>
+        <p class="subtitle" id="subtitle">Wishing you loud laughs, big wins and all the vibes. Click the buttons to start the party — balloons, confetti, music and more!</p>
+
+        <div class="cta" role="region" aria-label="Controls">
+          <button id="celebrateBtn" class="btn" aria-label="Celebrate">Celebrate 🎊</button>
+          <button id="balloonReleaseBtn" class="btn secondary small" aria-label="Release balloons">Release Balloons 🎈</button>
+          <button id="partyModeBtn" class="btn secondary small" aria-pressed="false" aria-label="Toggle party mode">Party Mode: Off</button>
+          <button id="bgChangeBtn" class="btn small" aria-label="Change background">Change Background 🌈</button>
+          <button id="moreConfettiBtn" class="btn small" aria-label="More confetti">Confetti Blast ✨</button>
+        </div>
+
+        <div style="margin-top:18px; display:flex; gap:14px; justify-content:center; align-items:center; flex-wrap:wrap;">
+          <button id="muteAllBtn" class="btn small" aria-pressed="false" title="Mute/unmute audio">Mute</button>
+          <button id="spawnManyBalloonBtn" class="btn secondary small" title="Spawn many balloons">Spawn Many Balloons</button>
+          <button id="fireworksBtn" class="btn small" title="Start fireworks">Fireworks!</button>
+        </div>
+
+        <div class="note" id="noteText">Tip: Click a balloon to pop it. Click the title for a surprise message.</div>
+
+      </div>
+    </main>
+
+    <aside class="controls" aria-label="Music and party controls">
+      <div>
+        <h3>Music Player (starts on user click)</h3>
+        <div class="audio-card" role="region" aria-label="Audio player">
+          <div style="display:flex; gap:10px; align-items:center;">
+            <div class="icon" aria-hidden="true">♪</div>
+            <div style="flex:1">
+              <div style="font-weight:800">Birthday Playlist</div>
+              <div style="font-size:0.92rem; color:var(--muted)">Plays only after you interact (browser policy)</div>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:8px; align-items:center;">
+            <button id="playBtn" class="btn small" aria-label="Play">Play ▶</button>
+            <button id="pauseBtn" class="btn small" aria-label="Pause">Pause ⏸</button>
+            <button id="prevBtn" class="btn small" aria-label="Previous track">Prev ⏮</button>
+            <button id="nextBtn" class="btn small" aria-label="Next track">Next ⏭</button>
+            <div style="flex:1"></div>
+            <div style="font-size:0.85rem; color:var(--muted)" id="trackLabel">Track: 1 / 3</div>
+          </div>
+
+          <div class="seek" style="margin-top:8px;">
+            <input id="seekRange" type="range" min="0" max="100" value="0" aria-label="Seek"/>
+            <div style="display:flex; justify-content:space-between; font-size:0.86rem; color:var(--muted); margin-top:6px;">
+              <div id="curTime">0:00</div>
+              <div id="durTime">0:00</div>
+            </div>
+          </div>
+
+          <div class="vol-row" style="margin-top:8px; display:flex; align-items:center; gap:10px;">
+            <div style="font-size:0.95rem; color:var(--muted)">Volume</div>
+            <input id="volumeRange" type="range" min="0" max="1" step="0.01" value="0.9" aria-label="Volume"/>
+            <button id="muteBtn" class="btn small secondary" aria-pressed="false">Mute</button>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <h3>Share & Link</h3>
+        <div class="share">
+          <input id="shareLink" readonly aria-label="Share link" />
+          <button id="copyLinkBtn" class="btn small secondary">Copy</button>
+        </div>
+        <div style="margin-top:8px; font-size:0.92rem; color:var(--muted)">Share this GitHub Pages link with friends.</div>
+      </div>
+
+      <div>
+        <h3>Party Tools</h3>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button id="intensityUpBtn" class="btn small secondary">Intensity +</button>
+          <button id="intensityDownBtn" class="btn small secondary">Intensity -</button>
+          <button id="resetSceneBtn" class="btn small" title="Reset everything">Reset Scene</button>
+          <button id="downloadHtmlBtn" class="btn small secondary" style="display:none">Download HTML</button>
+        </div>
+        <div style="margin-top:8px; font-size:0.92rem; color:var(--muted)">Use intensity to control how wild the party gets.</div>
+      </div>
+
+      <div class="footer" style="margin-top:8px">Made for: <strong>Pratik Bhadwe</strong> • Open and press <strong>Celebrate</strong></div>
+    </aside>
+  </div>
+
+  <!-- Floating balloons area: we will dynamically create many balloons too -->
+  <div id="balloonRoot" aria-hidden="true"></div>
+
+  <!-- canvases -->
+  <canvas id="confettiCanvas" width="800" height="600" aria-hidden="true"></canvas>
+  <canvas id="fxCanvas" width="800" height="600" aria-hidden="true"></canvas>
+
+  <!-- Audio elements for playlist: replace the AUDIO_SRC_* placeholders with raw GitHub links or relative filenames -->
+  <audio id="audio_1" src="AUDIO_SRC_1" preload="metadata"></audio>
+  <audio id="audio_2" src="AUDIO_SRC_2" preload="metadata"></audio>
+  <audio id="audio_3" src="AUDIO_SRC_3" preload="metadata"></audio>
+
+<script>
+/* ============================
+   FULL PARTY ENGINE (JavaScript)
+   - Confetti (confettiCanvas)
+   - Fireworks (fxCanvas)
+   - Balloon manager (DOM)
+   - Audio playlist & controls
+   - Background manager
+   - Interaction handlers
+   - Intensity system
+   ============================ */
+
+/* ---- Utilities ---- */
+const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => Array.from(document.querySelectorAll(sel));
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+const rand = (a,b) => a + Math.random()*(b-a);
+const rndInt = (a,b) => Math.floor(rand(a,b+1));
+
+/* ---- Globals / State ---- */
+const confCanvas = document.getElementById('confettiCanvas');
+const fxCanvas = document.getElementById('fxCanvas');
+const confCtx = confCanvas.getContext('2d');
+const fxCtx = fxCanvas.getContext('2d');
+const balloonRoot = document.getElementById('balloonRoot');
+
+let devicePixel = window.devicePixelRatio || 1;
+function resizeCanvases(){
+  [confCanvas, fxCanvas].forEach(c=>{
+    c.width = innerWidth * devicePixel;
+    c.height = innerHeight * devicePixel;
+    c.style.width = innerWidth + 'px';
+    c.style.height = innerHeight + 'px';
+    const ctx = c.getContext('2d');
+    ctx.setTransform(devicePixel,0,0,devicePixel,0,0);
+  });
+}
+resizeCanvases();
+window.addEventListener('resize', () => { devicePixel = window.devicePixelRatio || 1; resizeCanvases(); });
+
+/* ---- Intensity system ---- */
+let intensity = 1; // 1..20
+function increaseIntensity(){ intensity = clamp(intensity+1,1,20); updateIntensityUI(); }
+function decreaseIntensity(){ intensity = clamp(intensity-1,1,20); updateIntensityUI(); }
+function updateIntensityUI(){ /* could reflect visually */ }
+
+/* ---- Confetti system ---- */
+let confettiParticles = [];
+let confettiRunning = false;
+function spawnConfetti(x = innerWidth/2, y = innerHeight/3, count = 80, spread = Math.PI){
+  for (let i=0;i<count;i++){
+    const ang = (-Math.PI/2) + (Math.random()-0.5)*spread;
+    const speed = rand(2.4,9) * (1 + intensity*0.06);
+    confettiParticles.push({
+      x, y,
+      vx: Math.cos(ang)*speed,
+      vy: Math.sin(ang)*speed,
+      w: rand(6,12), h: rand(6,10),
+      rot: rand(0,Math.PI*2),
+      rSpeed: rand(-0.2,0.2),
+      color: `hsl(${Math.random()*360}, 84%, ${rand(45,62)}%)`,
+      life: rndInt(120, 260)
+    });
+  }
+  if (!confettiRunning) runConfettiLoop();
+}
+function runConfettiLoop(){
+  confettiRunning = true;
+  function frame(){
+    confCtx.clearRect(0,0,innerWidth,innerHeight);
+    for (let i=confettiParticles.length-1;i>=0;i--){
+      const p = confettiParticles[i];
+      p.vy += 0.18; p.vx *= 0.997; p.x += p.vx; p.y += p.vy; p.rot += p.rSpeed; p.life--;
+      confCtx.save();
+      confCtx.translate(p.x, p.y);
+      confCtx.rotate(p.rot);
+      confCtx.fillStyle = p.color;
+      confCtx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+      confCtx.restore();
+      if (p.y > innerHeight + 80 || p.life < 0 || p.x < -100 || p.x > innerWidth + 100){
+        confettiParticles.splice(i,1);
+      }
+    }
+    if (confettiParticles.length>0) requestAnimationFrame(frame);
+    else confettiRunning = false;
+  }
+  requestAnimationFrame(frame);
+}
+
+/* ---- Fireworks system ---- */
+let fxParticles = [];
+let fxRunning = false;
+function spawnFirework(x, y, count = 36){
+  fxParticles.push({ x, y, r:0, life:24, stage: 'flash' });
+  setTimeout(()=> {
+    for (let i=0;i<count;i++){
+      const angle = (i/count)*Math.PI*2 + rand(-0.18,0.18);
+      const sp = rand(2.2,6.2) * (1 + intensity*0.04);
+      fxParticles.push({
+        x, y, vx: Math.cos(angle)*sp, vy: Math.sin(angle)*sp,
+        color: `hsl(${Math.random()*360}, 90%, ${rand(45,66)}%)`,
+        life: rndInt(80, 220), size: rand(1.8,3.8)
+      });
+    }
+  }, 120);
+  if (!fxRunning) runFxLoop();
+}
+function runFxLoop(){
+  fxRunning = true;
+  function frame(){
+    fxCtx.clearRect(0,0,innerWidth,innerHeight);
+    for (let i=fxParticles.length-1;i>=0;i--){
+      const p = fxParticles[i];
+      if (p.stage === 'flash'){
+        p.r += 1.6;
+        p.life--;
+        fxCtx.beginPath();
+        const alpha = Math.max(0, p.life/28);
+        fxCtx.fillStyle = `rgba(255,255,255,${alpha})`;
+        fxCtx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+        fxCtx.fill();
+        if (p.life<=0) fxParticles.splice(i,1);
+      } else {
+        p.vy += 0.04; p.vx *= 0.997;
+        p.x += p.vx; p.y += p.vy; p.life--;
+        fxCtx.beginPath();
+        fxCtx.globalAlpha = Math.max(0, p.life/220);
+        fxCtx.fillStyle = p.color;
+        fxCtx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+        fxCtx.fill();
+        fxCtx.globalAlpha = 1;
+        if (p.life<=0 || p.y > innerHeight + 80) fxParticles.splice(i,1);
+      }
+    }
+    if (fxParticles.length>0) requestAnimationFrame(frame);
+    else fxRunning = false;
+  }
+  requestAnimationFrame(frame);
+}
+
+/* ---- Balloon manager (DOM) ---- */
+const balloonColors = ['#ff5b73','#ff85a1','#ffd166','#f9d423','#24c6dc','#a1ffce','#b28dff','#ffd1f2','#ffa591','#7bd389'];
+let activeBalloons = [];
+function createBalloon(opts = {}){
+  const el = document.createElement('div');
+  el.className = 'balloon';
+  const w = opts.w ?? rndInt(60,110);
+  const h = Math.round(w*1.2);
+  el.style.width = w + 'px';
+  el.style.height = h + 'px';
+  el.style.left = (opts.left ?? rand(6,88)) + '%';
+  el.style.bottom = (opts.bottom ?? -rand(180,320)) + 'px';
+  const color = opts.color ?? balloonColors[rndInt(0,balloonColors.length-1)];
+  el.style.background = `linear-gradient(180deg, ${shade(color,8)}, ${color})`;
+  el.style.opacity = opts.opacity ?? 1;
+  el.style.transform = `translateZ(0)`;
+  el.style.animationDuration = (opts.speed ?? rand(8,20)) + 's';
+  el.innerHTML = `<div style="font-size:${Math.max(12,Math.round(w*0.18))}px">${opts.label ?? ''}</div><div class="tie"></div>`;
+  el.dataset.drift = (Math.random()*1.2 - 0.6).toFixed(3);
+  el.dataset.speed = parseFloat(el.style.animationDuration);
+  el.addEventListener('click', (ev) => { popBalloon(el, ev); });
+  balloonRoot.appendChild(el);
+  activeBalloons.push(el);
+  return el;
+}
+function popBalloon(el, ev){
+  if (!el || el.classList.contains('pop')) return;
+  el.classList.add('pop');
+  const rect = el.getBoundingClientRect();
+  const cx = rect.left + rect.width/2;
+  const cy = rect.top + rect.height/2;
+  spawnConfetti(cx, cy, 24 + rndInt(6,48), Math.PI*1.8);
+  spawnFirework(cx, cy, 12 + rndInt(6,18));
+  generatePopTone();
+  setTimeout(()=>{ try{ el.remove(); }catch(e){} }, 650);
+}
+function generatePopTone(){
+  try{
+    const actx = new (window.AudioContext || window.webkitAudioContext)();
+    const o = actx.createOscillator();
+    const g = actx.createGain();
+    o.type = 'sine';
+    o.frequency.setValueAtTime(900 + Math.random()*800, actx.currentTime);
+    o.frequency.exponentialRampToValueAtTime(200, actx.currentTime + 0.12);
+    g.gain.setValueAtTime(0.12, actx.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + 0.12);
+    o.connect(g); g.connect(actx.destination);
+    o.start();
+    setTimeout(()=>{ o.stop(); actx.close(); }, 160);
+  } catch(e){}
+}
+function spawnBalloons(count = 6){
+  for (let i=0;i<count;i++){
+    createBalloon({ left: rand(6,92), speed: rand(9,18), color: balloonColors[rndInt(0,balloonColors.length-1)], label: '' });
+  }
+}
+function clearBalloons(){
+  activeBalloons.forEach(b=>{ try{ b.remove(); }catch(e){} });
+  activeBalloons = [];
+}
+
+/* drift animation for balloons */
+(function runBalloonTicker(){
+  function frame(){
+    activeBalloons.forEach((el, idx)=>{
+      const drift = parseFloat(el.dataset.drift) || 0;
+      const speed = parseFloat(el.dataset.speed) || 12;
+      const t = performance.now()/1000;
+      const tx = Math.sin(t*(0.6 + idx*0.03))*18*drift;
+      el.style.transform = `translateX(${tx}px)`;
+      const rect = el.getBoundingClientRect();
+      if (rect.top + rect.height < -40){
+        el.style.bottom = '-240px';
+        el.style.left = rand(6,92) + '%';
+        el.style.opacity = 1;
+        el.classList.remove('pop');
+      }
+    });
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+
+/* small color helper */
+function shade(hex, percent){
+  const c = hex.replace('#','');
+  const num = parseInt(c,16);
+  let r = (num >> 16) + Math.round(255*percent/100);
+  let g = ((num >> 8) & 0x00FF) + Math.round(255*percent/100);
+  let b = (num & 0x0000FF) + Math.round(255*percent/100);
+  r = clamp(r,0,255); g = clamp(g,0,255); b = clamp(b,0,255);
+  return `rgb(${r},${g},${b})`;
+}
+
+/* ---- Background manager ---- */
+const backgrounds = [
+  'linear-gradient(135deg,#ff9a9e,#fad0c4)',
+  'linear-gradient(135deg,#a1c4fd,#c2e9fb)',
+  'linear-gradient(135deg,#f6d365,#fda085)',
+  'linear-gradient(135deg,#84fab0,#8fd3f4)',
+  'linear-gradient(135deg,#ffdde1,#ee9ca7)',
+  'linear-gradient(135deg,#fbc2eb,#a6c1ee)',
+  'linear-gradient(135deg,#fdfbfb,#ebedee)'
+];
+function changeBackground(idx){
+  if (typeof idx === 'number') document.body.style.background = backgrounds[idx % backgrounds.length];
+  else document.body.style.background = backgrounds[rndInt(0,backgrounds.length-1)];
+}
+
+/* ---- Audio playlist & controls ---- */
+const audioEls = [
+  document.getElementById('audio_1'),
+  document.getElementById('audio_2'),
+  document.getElementById('audio_3')
+];
+let playlist = [
+  { el: audioEls[0], label: 'Track 1' },
+  { el: audioEls[1], label: 'Track 2' },
+  { el: audioEls[2], label: 'Track 3' }
+];
+let currentIndex = 0;
+let audioPlaying = false;
+let userInteracted = false; // ensures play allowed
+
+function setTrackLabel(){
+  const lbl = $('#trackLabel');
+  if (lbl) lbl.textContent = `Track: ${currentIndex+1} / ${playlist.length} • ${playlist[currentIndex].label}`;
+}
+function playCurrent(){
+  if (!userInteracted) userInteracted = true;
+  playlist[currentIndex].el.play().catch(()=>{});
+  audioPlaying = true;
+  updatePlayUI();
+}
+function pauseCurrent(){
+  playlist[currentIndex].el.pause();
+  audioPlaying = false;
+  updatePlayUI();
+}
+function nextTrack(){
+  playlist[currentIndex].el.pause();
+  playlist[currentIndex].el.currentTime = 0;
+  currentIndex = (currentIndex+1) % playlist.length;
+  setTrackLabel();
+  playCurrent();
+}
+function prevTrack(){
+  playlist[currentIndex].el.pause();
+  playlist[currentIndex].el.currentTime = 0;
+  currentIndex = (currentIndex-1 + playlist.length) % playlist.length;
+  setTrackLabel();
+  playCurrent();
+}
+function updatePlayUI(){
+  $('#playBtn').textContent = audioPlaying ? 'Playing ▶' : 'Play ▶';
+  $('#pauseBtn').textContent = audioPlaying ? 'Pause ⏸' : 'Pause ⏸';
+}
+
+/* sync seek & time display with current track */
+function hookAudioEvents(){
+  playlist.forEach((t, idx)=>{
+    t.el.addEventListener('timeupdate', () => {
+      if (idx !== currentIndex) return;
+      const cur = t.el.currentTime || 0;
+      const dur = t.el.duration || 0;
+      const pct = dur ? Math.round((cur/dur)*100) : 0;
+      $('#seekRange').value = pct;
+      $('#curTime').textContent = formatTime(cur);
+      $('#durTime').textContent = formatTime(dur);
+    });
+    t.el.addEventListener('ended', () => {
+      nextTrack();
+    });
+  });
+}
+hookAudioEvents();
+
+function formatTime(s){
+  if (isNaN(s) || !isFinite(s)) return '0:00';
+  const m = Math.floor(s/60);
+  const sec = Math.floor(s%60).toString().padStart(2,'0');
+  return `${m}:${sec}`;
+}
+
+/* ---- UI wiring: buttons and controls ---- */
+$('#playBtn').addEventListener('click', async () => {
+  try { userInteracted = true; await playlist[currentIndex].el.play(); audioPlaying = true; } catch(e){}
+  updatePlayUI();
+});
+$('#pauseBtn').addEventListener('click', () => { playlist[currentIndex].el.pause(); audioPlaying = false; updatePlayUI(); });
+$('#nextBtn').addEventListener('click', () => { nextTrack(); });
+$('#prevBtn').addEventListener('click', () => { prevTrack(); });
+
+$('#seekRange').addEventListener('input', (e)=>{
+  const pct = parseFloat(e.target.value)/100;
+  const el = playlist[currentIndex].el;
+  if (el.duration) el.currentTime = el.duration * pct;
+});
+$('#volumeRange').addEventListener('input', (e)=>{
+  const v = parseFloat(e.target.value);
+  playlist.forEach(p => p.el.volume = v);
+});
+$('#muteBtn').addEventListener('click', ()=>{
+  const btn = $('#muteBtn');
+  const muted = btn.getAttribute('aria-pressed') === 'true';
+  if (muted){
+    btn.setAttribute('aria-pressed','false'); btn.textContent = 'Mute';
+    playlist.forEach(p => p.el.muted = false);
+  } else {
+    btn.setAttribute('aria-pressed','true'); btn.textContent = 'Muted';
+    playlist.forEach(p => p.el.muted = true);
+  }
+});
+
+/* share link autopopulate */
+try {
+  $('#shareLink').value = location.href;
+} catch(e){}
+
+/* copy link */
+$('#copyLinkBtn').addEventListener('click', async ()=>{
+  try { await navigator.clipboard.writeText($('#shareLink').value); $('#copyLinkBtn').textContent = 'Copied!'; setTimeout(()=>$('#copyLinkBtn').textContent='Copy',1200);} catch(e){ alert('Copy failed - select and copy manually'); }
+});
+
+/* mute all */
+$('#muteAllBtn').addEventListener('click', ()=>{
+  const btn = $('#muteAllBtn');
+  const pr = btn.getAttribute('aria-pressed') === 'true';
+  if (pr){
+    btn.setAttribute('aria-pressed','false'); btn.textContent = 'Mute';
+    playlist.forEach(p => p.el.muted = false);
+  } else {
+    btn.setAttribute('aria-pressed','true'); btn.textContent = 'Unmute';
+    playlist.forEach(p => p.el.muted = true);
+  }
+});
+
+/* intensity controls */
+$('#intensityUpBtn').addEventListener('click', ()=>{ increaseIntensity(); $('#intensityUpBtn').textContent = 'Intensity +' });
+$('#intensityDownBtn').addEventListener('click', ()=>{ decreaseIntensity(); $('#intensityDownBtn').textContent = 'Intensity -' });
+
+/* reset scene */
+$('#resetSceneBtn').addEventListener('click', ()=>{
+  clearBalloons();
+  confettiParticles = [];
+  fxParticles = [];
+  confCtx.clearRect(0,0,innerWidth,innerHeight);
+  fxCtx.clearRect(0,0,innerWidth,innerHeight);
+  intensity = 1;
+  playlist.forEach(p => { p.el.pause(); p.el.currentTime = 0; });
+  currentIndex = 0;
+  setTrackLabel();
+  updatePlayUI();
+  changeBackground(0);
+  $('#noteText').textContent = 'Scene reset. Ready to celebrate again!';
+});
+
+/* hide download html button (user said no download) but keep in DOM for flexibility */
+$('#downloadHtmlBtn').style.display = 'none';
+
+/* ---- Interaction handlers: main buttons ---- */
+$('#celebrateBtn').addEventListener('click', async (ev) => {
+  // user gesture allows audio play
+  try { userInteracted = true; await playlist[currentIndex].el.play(); audioPlaying = true; updatePlayUI(); } catch(e){}
+  // spawn a big confetti burst
+  spawnConfetti(innerWidth/2, innerHeight*0.25, 160 + intensity*28, Math.PI*1.6);
+  // spawn fireworks
+  spawnFirework(rand(120, innerWidth-120), rand(80, innerHeight*0.35), 24 + Math.round(intensity*3));
+  // spawn balloons
+  spawnBalloons(3 + Math.round(intensity*1.6));
+  // small UI effect
+  document.querySelector('.title').animate([{ transform: 'scale(1)' }, { transform: 'scale(1.04)' }, { transform: 'scale(1)' }], { duration: 700, easing: 'ease-out' });
+  // shaking subtitle
+  $('#subtitle').animate([{transform:'translateY(0)'},{transform:'translateY(-6px)'},{transform:'translateY(0)'}], { duration:800, easing:'ease-out' });
+});
+
+/* balloon release */
+$('#balloonReleaseBtn').addEventListener('click', ()=>{
+  spawnBalloons(6 + Math.round(intensity*2));
+});
+
+/* party mode toggle */
+$('#partyModeBtn').addEventListener('click', ()=>{
+  const btn = $('#partyModeBtn');
+  const on = btn.getAttribute('aria-pressed') === 'true';
+  if (on){
+    btn.setAttribute('aria-pressed','false'); btn.textContent = 'Party Mode: Off'; stopAmbient();
+  } else {
+    btn.setAttribute('aria-pressed','true'); btn.textContent = 'Party Mode: On'; startAmbient();
+  }
+});
+
+/* background change */
+$('#bgChangeBtn').addEventListener('click', ()=>{ changeBackground(); });
+
+/* more confetti */
+$('#moreConfettiBtn').addEventListener('click', ()=>{ spawnConfetti(rand(80,innerWidth-80), rand(60, innerHeight*0.4), 160 + intensity*30, Math.PI*1.9); });
+
+/* spawn many balloons */
+$('#spawnManyBalloonBtn').addEventListener('click', ()=>{ spawnBalloons(12 + Math.round(intensity*6)); });
+
+/* fireworks button */
+$('#fireworksBtn').addEventListener('click', ()=>{ for (let i=0;i<4;i++){ spawnFirework(rand(120,innerWidth-120), rand(80, innerHeight*0.45), 28 + Math.round(intensity*2)); } });
+
+/* title click surprise */
+$('#greetingTitle').addEventListener('click', ()=>{
+  alert('🎂 Happy Birthday, Pratik Bhadwe! Wishing you a lit year ahead!');
+  $('#greetingTitle').style.color = '#24c6dc';
+});
+
+/* keyboard accessibility shortcuts */
+document.addEventListener('keydown', (e)=>{
+  if (e.key === ' ' && document.activeElement === document.body){
+    e.preventDefault();
+    $('#celebrateBtn').click();
+  }
+  if (e.key.toLowerCase() === 'b') $('#balloonReleaseBtn').click();
+  if (e.key.toLowerCase() === 'f') $('#fireworksBtn').click();
+});
+
+/* ---- ambient confetti when party mode on ---- */
+let ambientInterval = null;
+function startAmbient(){
+  if (ambientInterval) return;
+  ambientInterval = setInterval(()=>{ spawnConfetti(rand(80,innerWidth-80), rand(innerHeight*0.05, innerHeight*0.35), rndInt(8,28)); }, Math.max(400, 1400 - intensity*80));
+}
+function stopAmbient(){ if (ambientInterval){ clearInterval(ambientInterval); ambientInterval = null; } }
+
+/* ---- periodic checks to keep loops running ---- */
+setInterval(()=>{
+  if (confettiParticles.length && !confettiRunning) runConfettiLoop();
+  if (fxParticles.length && !fxRunning) runFxLoop();
+}, 600);
+
+/* small touch spawn for mobile */
+window.addEventListener('touchstart', (ev) => {
+  const t = ev.touches[0];
+  spawnConfetti(t.clientX, t.clientY, 36, Math.PI*1.3);
+});
+
+/* ---- helpers & bootstrap ---- */
+function init(){
+  setTrackLabel();
+  // set initial background index 0
+  changeBackground(0);
+  // initial balloons cluster
+  spawnBalloons(8);
+  // tiny confetti to make it alive
+  spawnConfetti(innerWidth/2, innerHeight*0.18, 26, Math.PI*1.1);
+  // set volume from UI
+  const v = parseFloat($('#volumeRange').value);
+  playlist.forEach(p => p.el.volume = v);
+  // hide audio tracks that are empty: if src is placeholder, they may 404; keep UI robust
+  playlist.forEach((p, idx) => {
+    try{
+      const s = p.el.getAttribute('src') || '';
+      if (!s || s.trim().length < 6){ /* mark track label accordingly */ p.label = `Track ${idx+1} (add audio)`; }
+    } catch(e){}
+  });
+  setTrackLabel();
+  // set share link if possible
+  try { $('#shareLink').value = location.href; } catch(e){}
+}
+init();
+
+/* small polyfills & safety */
+(function safety(){
+  // Ensure audio elements won't throw on unavailable sources
+  playlist.forEach(p => {
+    p.el.addEventListener('error', (ev) => { console.warn('Audio error for', p.label); });
+  });
+})();
+</script>
+</body>
+</html>
