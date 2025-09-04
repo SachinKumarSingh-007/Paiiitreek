@@ -26,9 +26,12 @@ body{
   align-items:center;
   justify-content:center;
   min-height:100vh;
-  overflow:hidden;
+  overflow-x:hidden;
+  overflow-y:auto;
   color:#111;
   -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  padding: 10px;
+  transition: background 1s ease;
 }
 
 /* ====== LAYOUT ====== */
@@ -43,7 +46,13 @@ body{
   padding:18px;
 }
 @media (max-width:980px){
-  .container{ grid-template-columns: 1fr; height:auto; padding:12px; gap:14px; }
+  .container{ 
+    grid-template-columns: 1fr; 
+    height:auto; 
+    padding:12px; 
+    gap:14px; 
+    margin: 20px 0;
+  }
 }
 
 /* ====== LEFT HERO PANEL ====== */
@@ -56,7 +65,13 @@ body{
   overflow:hidden;
   min-height:540px;
 }
-.hero-inner{ max-width:920px; margin:0 auto; text-align:center; position:relative; z-index:3; }
+.hero-inner{ 
+  max-width:920px; 
+  margin:0 auto; 
+  text-align:center; 
+  position:relative; 
+  z-index:3; 
+}
 .title{
   font-weight:800;
   color:var(--accent);
@@ -66,11 +81,46 @@ body{
   align-items:center;
   justify-content:center;
   gap:12px;
+  flex-wrap: wrap;
 }
-.title .name{ color:#ff1f45; font-weight:900; font-size:2.8rem; text-shadow: 0 10px 26px rgba(255,75,92,0.12); }
-@media (max-width:520px){ .title{ font-size:1.3rem } .title .name{ font-size:1.45rem } }
+.title .name{ 
+  color:#ff1f45; 
+  font-weight:900; 
+  font-size:2.8rem; 
+  text-shadow: 0 10px 26px rgba(255,75,92,0.12); 
+}
+@media (max-width:768px){ 
+  .title{ 
+    font-size:2rem; 
+    flex-direction: column;
+    gap: 5px;
+  } 
+  .title .name{ 
+    font-size:2.2rem; 
+  } 
+}
+@media (max-width:520px){ 
+  .title{ 
+    font-size:1.6rem; 
+  } 
+  .title .name{ 
+    font-size:1.8rem; 
+  } 
+}
 
-.subtitle{ margin-top:12px; color:#333; font-size:1.05rem; max-width:62ch; margin-left:auto; margin-right:auto; }
+.subtitle{ 
+  margin-top:12px; 
+  color:#333; 
+  font-size:1.05rem; 
+  max-width:62ch; 
+  margin-left:auto; 
+  margin-right:auto; 
+}
+@media (max-width:768px){
+  .subtitle{
+    font-size: 0.95rem;
+  }
+}
 
 /* CTA row */
 .cta {
@@ -90,15 +140,37 @@ body{
   cursor:pointer;
   box-shadow:0 8px 26px rgba(255,75,92,0.12);
   transition: transform .16s ease, box-shadow .16s ease, opacity .12s;
+  min-width: 120px;
 }
 .btn.secondary{
-  background:transparent; color:var(--accent); border:2px solid rgba(255,75,92,0.08); box-shadow:none; font-weight:800;
+  background:transparent; 
+  color:var(--accent); 
+  border:2px solid rgba(255,75,92,0.08); 
+  box-shadow:none; 
+  font-weight:800;
 }
-.btn:active{ transform: translateY(2px) }
-.small{ font-size:0.92rem; padding:8px 12px; border-radius:10px; }
+.btn:active{ 
+  transform: translateY(2px);
+  box-shadow:0 4px 12px rgba(255,75,92,0.08);
+}
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.small{ 
+  font-size:0.92rem; 
+  padding:8px 12px; 
+  border-radius:10px; 
+  min-width: auto;
+}
 
 /* little note */
-.note{ margin-top:10px; color:var(--muted); font-size:0.95rem }
+.note{ 
+  margin-top:10px; 
+  color:var(--muted); 
+  font-size:0.95rem; 
+  padding: 0 10px;
+}
 
 /* ====== RIGHT CONTROL PANEL ====== */
 .controls {
@@ -112,7 +184,12 @@ body{
   box-shadow: 0 14px 40px rgba(0,0,0,0.06);
   min-height:420px;
 }
-.controls h3{ font-size:1.05rem; margin-bottom:6px; font-weight:800; color:#111 }
+.controls h3{ 
+  font-size:1.05rem; 
+  margin-bottom:6px; 
+  font-weight:800; 
+  color:#111; 
+}
 
 /* audio card */
 .audio-card{
@@ -120,42 +197,134 @@ body{
   border-radius:12px;
   background:linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.6));
   border:1px solid rgba(0,0,0,0.03);
-  display:flex; flex-direction:column; gap:10px;
+  display:flex; 
+  flex-direction:column; 
+  gap:10px;
 }
-.audio-row{ display:flex; gap:8px; align-items:center; }
+.audio-row{ 
+  display:flex; 
+  gap:8px; 
+  align-items:center; 
+}
 .icon{
-  width:46px;height:46px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(180deg,#fff,#fff);box-shadow:0 6px 18px rgba(0,0,0,0.05);
+  width:46px;
+  height:46px;
+  border-radius:10px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(180deg,#fff,#fff);
+  box-shadow:0 6px 18px rgba(0,0,0,0.05);
 }
-.seek{ flex:1; display:flex; gap:10px; align-items:center; }
-.seek input[type="range"]{ width:100%; -webkit-appearance:none; appearance:none; height:8px; border-radius:8px; background:linear-gradient(90deg,#ffd6dc,#c4f3e6); outline:none;}
-.seek input[type="range"]::-webkit-slider-thumb{ -webkit-appearance:none; width:16px; height:16px; border-radius:50%; background:#fff; border:3px solid var(--accent); box-shadow:0 6px 12px rgba(0,0,0,0.12) }
-.vol-row { display:flex; gap:8px; align-items:center; }
+.seek{ 
+  flex:1; 
+  display:flex; 
+  gap:10px; 
+  align-items:center; 
+  flex-direction: column;
+}
+.seek input[type="range"]{ 
+  width:100%; 
+  -webkit-appearance:none; 
+  appearance:none; 
+  height:8px; 
+  border-radius:8px; 
+  background:linear-gradient(90deg,#ffd6dc,#c4f3e6); 
+  outline:none;
+  cursor: pointer;
+}
+.seek input[type="range"]::-webkit-slider-thumb{ 
+  -webkit-appearance:none; 
+  width:16px; 
+  height:16px; 
+  border-radius:50%; 
+  background:#fff; 
+  border:3px solid var(--accent); 
+  box-shadow:0 6px 12px rgba(0,0,0,0.12);
+  cursor: pointer;
+}
+.vol-row { 
+  display:flex; 
+  gap:8px; 
+  align-items:center; 
+  margin-top: 8px;
+}
 
 /* small controls group */
-.group { display:flex; gap:8px; flex-wrap:wrap; align-items:center }
+.group { 
+  display:flex; 
+  gap:8px; 
+  flex-wrap:wrap; 
+  align-items:center; 
+  justify-content: center;
+}
 
 /* share box */
 .share {
-  display:flex; gap:8px; align-items:center;
+  display:flex; 
+  gap:8px; 
+  align-items:center;
   background:linear-gradient(180deg, rgba(255,255,255,0.88), rgba(255,255,255,0.7));
-  padding:10px; border-radius:10px;
+  padding:10px; 
+  border-radius:10px;
 }
-.share input{ flex:1; padding:8px 10px; border-radius:8px; border:1px solid rgba(0,0,0,0.06) }
+.share input{ 
+  flex:1; 
+  padding:8px 10px; 
+  border-radius:8px; 
+  border:1px solid rgba(0,0,0,0.06);
+  font-size: 0.9rem;
+}
 
 /* footer */
-.footer { text-align:center; font-size:0.9rem; color:var(--muted); margin-top:6px }
+.footer { 
+  text-align:center; 
+  font-size:0.9rem; 
+  color:var(--muted); 
+  margin-top:6px; 
+}
 
 /* ====== BALLOONS: base style; others created dynamically ====== */
 .balloon{
-  position:absolute;
-  bottom:-260px;
-  width:78px; height:100px; border-radius:50%;
-  display:grid; place-items:center; color:#fff; font-weight:800;
+  position:fixed;
+  width:60px; 
+  height:75px; 
+  border-radius:50%;
+  display:grid; 
+  place-items:center; 
+  color:#fff; 
+  font-weight:800;
   box-shadow:0 18px 40px rgba(0,0,0,0.12);
-  cursor:pointer; transform-origin:center;
+  cursor:pointer; 
+  transform-origin:center;
   transition: transform .45s cubic-bezier(.17,.93,.32,1), opacity .25s;
+  z-index: 5;
+  bottom: -100px;
+  animation-name: float-up;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
 }
-.balloon .tie{ position:absolute; bottom:-42px; left:50%; transform:translateX(-50%); width:2px; height:60px; background:rgba(0,0,0,0.35); border-radius:3px; }
+.balloon .tie{ 
+  position:absolute; 
+  bottom:-22px; 
+  left:50%; 
+  transform:translateX(-50%); 
+  width:2px; 
+  height:30px; 
+  background:rgba(0,0,0,0.35); 
+  border-radius:3px; 
+}
+
+@keyframes float-up {
+  from { bottom: -100px; }
+  to { bottom: 100vh; }
+}
+
+@keyframes drift {
+  0% { transform: translateX(0) rotate(0deg); }
+  50% { transform: translateX(15px) rotate(3deg); }
+  100% { transform: translateX(0) rotate(0deg); }
+}
 
 /* pop class */
 .pop {
@@ -166,30 +335,149 @@ body{
 
 /* confetti canvas sits above content */
 #confettiCanvas{
-  position:fixed; inset:0; z-index:120; pointer-events:none;
+  position:fixed; 
+  inset:0; 
+  z-index:120; 
+  pointer-events:none;
 }
 
 /* fireworks canvas on top */
 #fxCanvas{
-  position:fixed; inset:0; z-index:130; pointer-events:none;
+  position:fixed; 
+  inset:0; 
+  z-index:130; 
+  pointer-events:none;
 }
 
 /* small accessibility focus */
-[tabindex]{ outline:none }
-[tabindex]:focus{ box-shadow:0 0 0 3px rgba(255,75,92,0.16); border-radius:8px }
+[tabindex]{ 
+  outline:none; 
+}
+[tabindex]:focus{ 
+  box-shadow:0 0 0 3px rgba(255,75,92,0.16); 
+  border-radius:8px; 
+}
 
 /* help bubble */
-.hint{ font-size:0.9rem; color:var(--muted) }
+.hint{ 
+  font-size:0.9rem; 
+  color:var(--muted); 
+}
 /* decorative orbs */
-.orb { position:fixed; border-radius:50%; filter:blur(48px); opacity:0.85; pointer-events:none; z-index:0 }
-.orb.o1{ width:580px;height:580px; left:-110px; top:-80px; background:linear-gradient(180deg,#ffdce0,#ffb6c1) }
-.orb.o2{ width:420px;height:420px; right:-80px; bottom:-120px; background:linear-gradient(180deg,#d3f7ee,#b6fff0) }
+.orb { 
+  position:fixed; 
+  border-radius:50%; 
+  filter:blur(48px); 
+  opacity:0.85; 
+  pointer-events:none; 
+  z-index:0; 
+}
+.orb.o1{ 
+  width:580px;
+  height:580px; 
+  left:-110px; 
+  top:-80px; 
+  background:linear-gradient(180deg,#ffdce0,#ffb6c1); 
+}
+.orb.o2{ 
+  width:420px;
+  height:420px; 
+  right:-80px; 
+  bottom:-120px; 
+  background:linear-gradient(180deg,#d3f7ee,#b6fff0); 
+}
 
 /* mobile tweaks */
-@media (max-width:760px){
-  .controls{ padding:12px }
-  .container{ grid-template-columns: 1fr; gap:12px; }
-  .hero{ padding:18px }
+@media (max-width:768px){
+  .controls{ 
+    padding:12px; 
+    min-height: auto;
+  }
+  .container{ 
+    grid-template-columns: 1fr; 
+    gap:12px; 
+    height: auto;
+  }
+  .hero{ 
+    padding:18px; 
+    min-height: auto;
+  }
+  .btn {
+    min-width: 100px;
+    padding: 10px 12px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Toast notification */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+/* Button pulse animation for important actions */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.pulse {
+  animation: pulse 1.5s infinite;
+}
+
+/* Intensity indicator */
+.intensity-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.intensity-bar {
+  height: 8px;
+  flex-grow: 1;
+  background: #eee;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.intensity-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ff9a9e, #ff3b5c);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+/* Audio loading indicator */
+.audio-loading {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,59,92,.3);
+  border-radius: 50%;
+  border-top-color: var(--accent);
+  animation: spin 1s ease-in-out infinite;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 </style>
 </head>
@@ -208,7 +496,7 @@ body{
         <p class="subtitle" id="subtitle">Wishing you loud laughs, big wins and all the vibes. Click the buttons to start the party — balloons, confetti, music and more!</p>
 
         <div class="cta" role="region" aria-label="Controls">
-          <button id="celebrateBtn" class="btn" aria-label="Celebrate">Celebrate 🎊</button>
+          <button id="celebrateBtn" class="btn pulse" aria-label="Celebrate">Celebrate 🎊</button>
           <button id="balloonReleaseBtn" class="btn secondary small" aria-label="Release balloons">Release Balloons 🎈</button>
           <button id="partyModeBtn" class="btn secondary small" aria-pressed="false" aria-label="Toggle party mode">Party Mode: Off</button>
           <button id="bgChangeBtn" class="btn small" aria-label="Change background">Change Background 🌈</button>
@@ -234,11 +522,14 @@ body{
             <div class="icon" aria-hidden="true">♪</div>
             <div style="flex:1">
               <div style="font-weight:800">Birthday Playlist</div>
-              <div style="font-size:0.92rem; color:var(--muted)">Plays only after you interact (browser policy)</div>
+              <div style="font-size:0.92rem; color:var(--muted)">
+                Plays only after you interact (browser policy)
+                <span id="audioLoading" class="audio-loading" style="display:none"></span>
+              </div>
             </div>
           </div>
 
-          <div style="display:flex; gap:8px; align-items:center;">
+          <div style="display:flex; gap:8px; align-items:center; flex-wrap: wrap;">
             <button id="playBtn" class="btn small" aria-label="Play">Play ▶</button>
             <button id="pauseBtn" class="btn small" aria-label="Pause">Pause ⏸</button>
             <button id="prevBtn" class="btn small" aria-label="Previous track">Prev ⏮</button>
@@ -274,18 +565,26 @@ body{
 
       <div>
         <h3>Party Tools</h3>
-        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+        <div class="group">
           <button id="intensityUpBtn" class="btn small secondary">Intensity +</button>
           <button id="intensityDownBtn" class="btn small secondary">Intensity -</button>
           <button id="resetSceneBtn" class="btn small" title="Reset everything">Reset Scene</button>
-          <button id="downloadHtmlBtn" class="btn small secondary" style="display:none">Download HTML</button>
         </div>
-        <div style="margin-top:8px; font-size:0.92rem; color:var(--muted)">Use intensity to control how wild the party gets.</div>
+        <div class="intensity-indicator">
+          <span style="font-size:0.9rem; color:var(--muted)">Intensity:</span>
+          <div class="intensity-bar">
+            <div class="intensity-fill" id="intensityFill" style="width: 5%;"></div>
+          </div>
+          <span id="intensityValue" style="font-size:0.9rem; font-weight:bold; color:var(--accent)">1</span>
+        </div>
       </div>
 
       <div class="footer" style="margin-top:8px">Made for: <strong>Pratik Bhadwe</strong> • Open and press <strong>Celebrate</strong></div>
     </aside>
   </div>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast"></div>
 
   <!-- Floating balloons area: we will dynamically create many balloons too -->
   <div id="balloonRoot" aria-hidden="true"></div>
@@ -294,13 +593,16 @@ body{
   <canvas id="confettiCanvas" width="800" height="600" aria-hidden="true"></canvas>
   <canvas id="fxCanvas" width="800" height="600" aria-hidden="true"></canvas>
 
-  <!-- Audio elements for playlist: replace the AUDIO_SRC_* placeholders with raw GitHub links or relative filenames -->
-  <audio id="audio_1" src="https://raw.githubusercontent.com/SachinKumarSingh-007/Paiiitreek/27a83489858107bb556fc56b8cbcfa1be282519c/Audio%202025-09-04%20at%2022.50.39_2ae46a5c.mp3
-" preload="metadata"></audio>
-  <audio id="audio_2" src="https://raw.githubusercontent.com/SachinKumarSingh-007/Paiiitreek/main/WhatsApp%20Audio%202025-09-04%20at%2023.40.19_4d8dfc60.mp3
-" preload="metadata"></audio>
-  <audio id="audio_3" src="https://raw.githubusercontent.com/SachinKumarSingh-007/Paiiitreek/main/WhatsApp%20Audio%202025-09-04%20at%2023.40.18_9ba418b3.mp3
-" preload="metadata"></audio>
+  <!-- Audio elements for playlist: using GitHub raw URLs -->
+  <audio id="audio_1" preload="metadata">
+    <source src="https://raw.githubusercontent.com/SachinKumarSingh-007/Paiiitreek/main/WhatsApp%20Audio%202025-09-04%20at%2023.40.19_4d8dfc60.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="audio_2" preload="metadata">
+    <source src="https://raw.githubusercontent.com/SachinKumarSingh-007/Paiiitreek/main/WhatsApp%20Audio%202025-09-04%20at%2023.40.18_9ba418b3.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="audio_3" preload="metadata">
+    <source src="https://raw.githubusercontent.com/SachinKumarSingh-007/Paiiitreek/27a83489858107bb556fc56b8cbcfa1be282519c/Audio%202025-09-04%20at%2022.50.39_2ae46a5c.mp3" type="audio/mpeg">
+  </audio>
 
 <script>
 /* ============================
@@ -320,6 +622,16 @@ const $$ = (sel) => Array.from(document.querySelectorAll(sel));
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const rand = (a,b) => a + Math.random()*(b-a);
 const rndInt = (a,b) => Math.floor(rand(a,b+1));
+
+// Show toast notification
+function showToast(message, duration = 2000) {
+  const toast = $('#toast');
+  toast.textContent = message;
+  toast.classList.add('show');
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, duration);
+}
 
 /* ---- Globals / State ---- */
 const confCanvas = document.getElementById('confettiCanvas');
@@ -344,9 +656,25 @@ window.addEventListener('resize', () => { devicePixel = window.devicePixelRatio 
 
 /* ---- Intensity system ---- */
 let intensity = 1; // 1..20
-function increaseIntensity(){ intensity = clamp(intensity+1,1,20); updateIntensityUI(); }
-function decreaseIntensity(){ intensity = clamp(intensity-1,1,20); updateIntensityUI(); }
-function updateIntensityUI(){ /* could reflect visually */ }
+function increaseIntensity(){ 
+  intensity = clamp(intensity+1,1,20); 
+  updateIntensityUI(); 
+  showToast(`Intensity increased to ${intensity}`);
+}
+function decreaseIntensity(){ 
+  intensity = clamp(intensity-1,1,20); 
+  updateIntensityUI(); 
+  showToast(`Intensity decreased to ${intensity}`);
+}
+function updateIntensityUI(){ 
+  // Update intensity indicator
+  $('#intensityValue').textContent = intensity;
+  $('#intensityFill').style.width = `${intensity * 5}%`;
+  
+  // Visual feedback for intensity
+  document.body.style.setProperty('--accent', `hsl(${340 + intensity * 2}, 84%, 60%)`);
+  document.body.style.setProperty('--accent-dark', `hsl(${340 + intensity * 2}, 74%, 50%)`);
+}
 
 /* ---- Confetti system ---- */
 let confettiParticles = [];
@@ -385,8 +713,6 @@ function runConfettiLoop(){
         confettiParticles.splice(i,1);
       }
     }
-    if (confettiParticles.length>0) requestAnimationFrame(frame);
-    else confettiRunning = false;
   }
   requestAnimationFrame(frame);
 }
@@ -445,94 +771,127 @@ function runFxLoop(){
 /* ---- Balloon manager (DOM) ---- */
 const balloonColors = ['#ff5b73','#ff85a1','#ffd166','#f9d423','#24c6dc','#a1ffce','#b28dff','#ffd1f2','#ffa591','#7bd389'];
 let activeBalloons = [];
-function createBalloon(opts = {}){
+
+function createBalloon(opts = {}) {
   const el = document.createElement('div');
   el.className = 'balloon';
-  const w = opts.w ?? rndInt(60,110);
-  const h = Math.round(w*1.2);
-  el.style.width = w + 'px';
-  el.style.height = h + 'px';
-  el.style.left = (opts.left ?? rand(6,88)) + '%';
-  el.style.bottom = (opts.bottom ?? -rand(180,320)) + 'px';
-  const color = opts.color ?? balloonColors[rndInt(0,balloonColors.length-1)];
-  el.style.background = `linear-gradient(180deg, ${shade(color,8)}, ${color})`;
-  el.style.opacity = opts.opacity ?? 1;
-  el.style.transform = `translateZ(0)`;
-  el.style.animationDuration = (opts.speed ?? rand(8,20)) + 's';
-  el.innerHTML = `<div style="font-size:${Math.max(12,Math.round(w*0.18))}px">${opts.label ?? ''}</div><div class="tie"></div>`;
-  el.dataset.drift = (Math.random()*1.2 - 0.6).toFixed(3);
-  el.dataset.speed = parseFloat(el.style.animationDuration);
-  el.addEventListener('click', (ev) => { popBalloon(el, ev); });
+  
+  // Set balloon size
+  const size = opts.size || rand(40, 70);
+  el.style.width = `${size}px`;
+  el.style.height = `${size * 1.3}px`;
+  
+  // Set balloon position
+  const left = opts.left || rand(5, 95);
+  el.style.left = `${left}%`;
+  
+  // Set balloon color
+  const color = opts.color || balloonColors[rndInt(0, balloonColors.length - 1)];
+  el.style.background = `radial-gradient(circle at 30% 30%, ${shade(color, 30)}, ${color})`;
+  
+  // Set animation duration
+  const duration = opts.duration || rand(15, 25);
+  el.style.animationDuration = `${duration}s`;
+  
+  // Add slight drift animation
+  el.style.animation = `float-up ${duration}s linear forwards, drift ${rand(3, 7)}s ease-in-out infinite`;
+  
+  // Add tie
+  el.innerHTML = `<div class="tie"></div>`;
+  
+  // Add click event to pop balloon
+  el.addEventListener('click', () => popBalloon(el));
+  
+  // Add to DOM and active balloons array
   balloonRoot.appendChild(el);
   activeBalloons.push(el);
+  
+  // Remove balloon after animation completes
+  setTimeout(() => {
+    if (el.parentNode) {
+      el.parentNode.removeChild(el);
+      activeBalloons = activeBalloons.filter(b => b !== el);
+    }
+  }, duration * 1000);
+  
   return el;
 }
-function popBalloon(el, ev){
+
+function popBalloon(el) {
   if (!el || el.classList.contains('pop')) return;
+  
+  // Add pop class for animation
   el.classList.add('pop');
+  
+  // Get balloon position
   const rect = el.getBoundingClientRect();
-  const cx = rect.left + rect.width/2;
-  const cy = rect.top + rect.height/2;
-  spawnConfetti(cx, cy, 24 + rndInt(6,48), Math.PI*1.8);
-  spawnFirework(cx, cy, 12 + rndInt(6,18));
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top + rect.height / 2;
+  
+  // Create visual effects
+  spawnConfetti(cx, cy, 24 + rndInt(6, 48), Math.PI * 1.8);
   generatePopTone();
-  setTimeout(()=>{ try{ el.remove(); }catch(e){} }, 650);
+  
+  // Remove from DOM after animation
+  setTimeout(() => {
+    if (el.parentNode) {
+      el.parentNode.removeChild(el);
+      activeBalloons = activeBalloons.filter(b => b !== el);
+    }
+  }, 650);
 }
-function generatePopTone(){
-  try{
+
+function generatePopTone() {
+  try {
     const actx = new (window.AudioContext || window.webkitAudioContext)();
     const o = actx.createOscillator();
     const g = actx.createGain();
     o.type = 'sine';
-    o.frequency.setValueAtTime(900 + Math.random()*800, actx.currentTime);
+    o.frequency.setValueAtTime(900 + Math.random() * 800, actx.currentTime);
     o.frequency.exponentialRampToValueAtTime(200, actx.currentTime + 0.12);
     g.gain.setValueAtTime(0.12, actx.currentTime);
     g.gain.exponentialRampToValueAtTime(0.001, actx.currentTime + 0.12);
-    o.connect(g); g.connect(actx.destination);
+    o.connect(g);
+    g.connect(actx.destination);
     o.start();
-    setTimeout(()=>{ o.stop(); actx.close(); }, 160);
-  } catch(e){}
-}
-function spawnBalloons(count = 6){
-  for (let i=0;i<count;i++){
-    createBalloon({ left: rand(6,92), speed: rand(9,18), color: balloonColors[rndInt(0,balloonColors.length-1)], label: '' });
+    setTimeout(() => {
+      o.stop();
+      actx.close();
+    }, 160);
+  } catch (e) {
+    console.warn('AudioContext not supported');
   }
 }
-function clearBalloons(){
-  activeBalloons.forEach(b=>{ try{ b.remove(); }catch(e){} });
+
+function spawnBalloons(count = 6) {
+  for (let i = 0; i < count; i++) {
+    createBalloon({
+      left: rand(5, 95),
+      duration: rand(15, 25),
+      color: balloonColors[rndInt(0, balloonColors.length - 1)],
+      size: rand(40, 70)
+    });
+  }
+}
+
+function clearBalloons() {
+  // Remove all balloons from DOM
+  while (balloonRoot.firstChild) {
+    balloonRoot.removeChild(balloonRoot.firstChild);
+  }
   activeBalloons = [];
 }
 
-/* drift animation for balloons */
-(function runBalloonTicker(){
-  function frame(){
-    activeBalloons.forEach((el, idx)=>{
-      const drift = parseFloat(el.dataset.drift) || 0;
-      const speed = parseFloat(el.dataset.speed) || 12;
-      const t = performance.now()/1000;
-      const tx = Math.sin(t*(0.6 + idx*0.03))*18*drift;
-      el.style.transform = `translateX(${tx}px)`;
-      const rect = el.getBoundingClientRect();
-      if (rect.top + rect.height < -40){
-        el.style.bottom = '-240px';
-        el.style.left = rand(6,92) + '%';
-        el.style.opacity = 1;
-        el.classList.remove('pop');
-      }
-    });
-    requestAnimationFrame(frame);
-  }
-  requestAnimationFrame(frame);
-})();
-
 /* small color helper */
-function shade(hex, percent){
-  const c = hex.replace('#','');
-  const num = parseInt(c,16);
-  let r = (num >> 16) + Math.round(255*percent/100);
-  let g = ((num >> 8) & 0x00FF) + Math.round(255*percent/100);
-  let b = (num & 0x0000FF) + Math.round(255*percent/100);
-  r = clamp(r,0,255); g = clamp(g,0,255); b = clamp(b,0,255);
+function shade(hex, percent) {
+  const c = hex.replace('#', '');
+  const num = parseInt(c, 16);
+  let r = (num >> 16) + Math.round(255 * percent / 100);
+  let g = ((num >> 8) & 0x00FF) + Math.round(255 * percent / 100);
+  let b = (num & 0x0000FF) + Math.round(255 * percent / 100);
+  r = clamp(r, 0, 255);
+  g = clamp(g, 0, 255);
+  b = clamp(b, 0, 255);
   return `rgb(${r},${g},${b})`;
 }
 
@@ -546,9 +905,16 @@ const backgrounds = [
   'linear-gradient(135deg,#fbc2eb,#a6c1ee)',
   'linear-gradient(135deg,#fdfbfb,#ebedee)'
 ];
-function changeBackground(idx){
-  if (typeof idx === 'number') document.body.style.background = backgrounds[idx % backgrounds.length];
-  else document.body.style.background = backgrounds[rndInt(0,backgrounds.length-1)];
+let bgIndex = 0;
+
+function changeBackground(idx) {
+  if (typeof idx === 'number') {
+    bgIndex = idx % backgrounds.length;
+  } else {
+    bgIndex = (bgIndex + 1) % backgrounds.length;
+  }
+  document.body.style.background = backgrounds[bgIndex];
+  showToast(`Background changed to theme ${bgIndex + 1}`);
 }
 
 /* ---- Audio playlist & controls ---- */
@@ -566,48 +932,65 @@ let currentIndex = 0;
 let audioPlaying = false;
 let userInteracted = false; // ensures play allowed
 
-function setTrackLabel(){
+function setTrackLabel() {
   const lbl = $('#trackLabel');
-  if (lbl) lbl.textContent = `Track: ${currentIndex+1} / ${playlist.length} • ${playlist[currentIndex].label}`;
+  if (lbl) lbl.textContent = `Track: ${currentIndex + 1} / ${playlist.length} • ${playlist[currentIndex].label}`;
 }
-function playCurrent(){
+
+function showAudioLoading(show) {
+  $('#audioLoading').style.display = show ? 'inline-block' : 'none';
+}
+
+async function playCurrent() {
   if (!userInteracted) userInteracted = true;
-  playlist[currentIndex].el.play().catch(()=>{});
-  audioPlaying = true;
-  updatePlayUI();
+  
+  showAudioLoading(true);
+  try {
+    await playlist[currentIndex].el.play();
+    audioPlaying = true;
+    updatePlayUI();
+  } catch (error) {
+    console.error("Error playing audio:", error);
+    showToast("Could not play audio. Click to interact first.");
+  }
+  showAudioLoading(false);
 }
-function pauseCurrent(){
+
+function pauseCurrent() {
   playlist[currentIndex].el.pause();
   audioPlaying = false;
   updatePlayUI();
 }
-function nextTrack(){
+
+function nextTrack() {
   playlist[currentIndex].el.pause();
   playlist[currentIndex].el.currentTime = 0;
-  currentIndex = (currentIndex+1) % playlist.length;
+  currentIndex = (currentIndex + 1) % playlist.length;
   setTrackLabel();
   playCurrent();
 }
-function prevTrack(){
+
+function prevTrack() {
   playlist[currentIndex].el.pause();
   playlist[currentIndex].el.currentTime = 0;
-  currentIndex = (currentIndex-1 + playlist.length) % playlist.length;
+  currentIndex = (currentIndex - 1 + playlist.length) % playlist.length;
   setTrackLabel();
   playCurrent();
 }
-function updatePlayUI(){
+
+function updatePlayUI() {
   $('#playBtn').textContent = audioPlaying ? 'Playing ▶' : 'Play ▶';
   $('#pauseBtn').textContent = audioPlaying ? 'Pause ⏸' : 'Pause ⏸';
 }
 
 /* sync seek & time display with current track */
-function hookAudioEvents(){
-  playlist.forEach((t, idx)=>{
+function hookAudioEvents() {
+  playlist.forEach((t, idx) => {
     t.el.addEventListener('timeupdate', () => {
       if (idx !== currentIndex) return;
       const cur = t.el.currentTime || 0;
       const dur = t.el.duration || 0;
-      const pct = dur ? Math.round((cur/dur)*100) : 0;
+      const pct = dur ? Math.round((cur / dur) * 100) : 0;
       $('#seekRange').value = pct;
       $('#curTime').textContent = formatTime(cur);
       $('#durTime').textContent = formatTime(dur);
@@ -615,43 +998,60 @@ function hookAudioEvents(){
     t.el.addEventListener('ended', () => {
       nextTrack();
     });
+    t.el.addEventListener('error', (e) => {
+      console.error("Audio error:", e);
+      showToast(`Error loading ${t.label}. Check file URL.`);
+    });
   });
 }
 hookAudioEvents();
 
-function formatTime(s){
+function formatTime(s) {
   if (isNaN(s) || !isFinite(s)) return '0:00';
-  const m = Math.floor(s/60);
-  const sec = Math.floor(s%60).toString().padStart(2,'0');
+  const m = Math.floor(s / 60);
+  const sec = Math.floor(s % 60).toString().padStart(2, '0');
   return `${m}:${sec}`;
 }
 
 /* ---- UI wiring: buttons and controls ---- */
 $('#playBtn').addEventListener('click', async () => {
-  try { userInteracted = true; await playlist[currentIndex].el.play(); audioPlaying = true; } catch(e){}
-  updatePlayUI();
+  try {
+    userInteracted = true;
+    await playCurrent();
+  } catch (e) {
+    console.error("Play error:", e);
+    showToast("Click anywhere first to enable audio");
+  }
 });
-$('#pauseBtn').addEventListener('click', () => { playlist[currentIndex].el.pause(); audioPlaying = false; updatePlayUI(); });
-$('#nextBtn').addEventListener('click', () => { nextTrack(); });
-$('#prevBtn').addEventListener('click', () => { prevTrack(); });
+$('#pauseBtn').addEventListener('click', () => {
+  pauseCurrent();
+});
+$('#nextBtn').addEventListener('click', () => {
+  nextTrack();
+});
+$('#prevBtn').addEventListener('click', () => {
+  prevTrack();
+});
 
-$('#seekRange').addEventListener('input', (e)=>{
-  const pct = parseFloat(e.target.value)/100;
+$('#seekRange').addEventListener('input', (e) => {
+  const pct = parseFloat(e.target.value) / 100;
   const el = playlist[currentIndex].el;
   if (el.duration) el.currentTime = el.duration * pct;
 });
-$('#volumeRange').addEventListener('input', (e)=>{
+$('#volumeRange').addEventListener('input', (e) => {
   const v = parseFloat(e.target.value);
   playlist.forEach(p => p.el.volume = v);
 });
-$('#muteBtn').addEventListener('click', ()=>{
+$('#muteBtn').addEventListener('click', () => {
   const btn = $('#muteBtn');
   const muted = btn.getAttribute('aria-pressed') === 'true';
-  if (muted){
-    btn.setAttribute('aria-pressed','false'); btn.textContent = 'Mute';
+  if (muted) {
+    btn.setAttribute('aria-pressed', 'false');
+    btn.textContent = 'Mute';
     playlist.forEach(p => p.el.muted = false);
   } else {
-    btn.setAttribute('aria-pressed','true'); btn.textContent = 'Muted';
+    btn.setAttribute('aria-pressed', 'true');
+    btn.textContent = 'Muted';
     playlist.forEach(p => p.el.muted = true);
   }
 });
@@ -659,119 +1059,186 @@ $('#muteBtn').addEventListener('click', ()=>{
 /* share link autopopulate */
 try {
   $('#shareLink').value = location.href;
-} catch(e){}
+} catch (e) {}
 
 /* copy link */
-$('#copyLinkBtn').addEventListener('click', async ()=>{
-  try { await navigator.clipboard.writeText($('#shareLink').value); $('#copyLinkBtn').textContent = 'Copied!'; setTimeout(()=>$('#copyLinkBtn').textContent='Copy',1200);} catch(e){ alert('Copy failed - select and copy manually'); }
+$('#copyLinkBtn').addEventListener('click', async () => {
+  try {
+    await navigator.clipboard.writeText($('#shareLink').value);
+    $('#copyLinkBtn').textContent = 'Copied!';
+    showToast("Link copied to clipboard!");
+    setTimeout(() => $('#copyLinkBtn').textContent = 'Copy', 1200);
+  } catch (e) {
+    showToast('Copy failed - select and copy manually');
+  }
 });
 
 /* mute all */
-$('#muteAllBtn').addEventListener('click', ()=>{
+$('#muteAllBtn').addEventListener('click', () => {
   const btn = $('#muteAllBtn');
   const pr = btn.getAttribute('aria-pressed') === 'true';
-  if (pr){
-    btn.setAttribute('aria-pressed','false'); btn.textContent = 'Mute';
+  if (pr) {
+    btn.setAttribute('aria-pressed', 'false');
+    btn.textContent = 'Mute';
     playlist.forEach(p => p.el.muted = false);
+    $('#muteBtn').setAttribute('aria-pressed', 'false');
+    $('#muteBtn').textContent = 'Mute';
   } else {
-    btn.setAttribute('aria-pressed','true'); btn.textContent = 'Unmute';
+    btn.setAttribute('aria-pressed', 'true');
+    btn.textContent = 'Unmute';
     playlist.forEach(p => p.el.muted = true);
+    $('#muteBtn').setAttribute('aria-pressed', 'true');
+    $('#muteBtn').textContent = 'Muted';
   }
 });
 
 /* intensity controls */
-$('#intensityUpBtn').addEventListener('click', ()=>{ increaseIntensity(); $('#intensityUpBtn').textContent = 'Intensity +' });
-$('#intensityDownBtn').addEventListener('click', ()=>{ decreaseIntensity(); $('#intensityDownBtn').textContent = 'Intensity -' });
+$('#intensityUpBtn').addEventListener('click', () => {
+  increaseIntensity();
+});
+$('#intensityDownBtn').addEventListener('click', () => {
+  decreaseIntensity();
+});
 
 /* reset scene */
-$('#resetSceneBtn').addEventListener('click', ()=>{
+$('#resetSceneBtn').addEventListener('click', () => {
   clearBalloons();
   confettiParticles = [];
   fxParticles = [];
-  confCtx.clearRect(0,0,innerWidth,innerHeight);
-  fxCtx.clearRect(0,0,innerWidth,innerHeight);
+  confCtx.clearRect(0, 0, innerWidth, innerHeight);
+  fxCtx.clearRect(0, 0, innerWidth, innerHeight);
   intensity = 1;
-  playlist.forEach(p => { p.el.pause(); p.el.currentTime = 0; });
+  updateIntensityUI();
+  playlist.forEach(p => {
+    p.el.pause();
+    p.el.currentTime = 0;
+  });
   currentIndex = 0;
   setTrackLabel();
   updatePlayUI();
   changeBackground(0);
-  $('#noteText').textContent = 'Scene reset. Ready to celebrate again!';
+  showToast('Scene reset. Ready to celebrate again!');
 });
-
-/* hide download html button (user said no download) but keep in DOM for flexibility */
-$('#downloadHtmlBtn').style.display = 'none';
 
 /* ---- Interaction handlers: main buttons ---- */
 $('#celebrateBtn').addEventListener('click', async (ev) => {
   // user gesture allows audio play
-  try { userInteracted = true; await playlist[currentIndex].el.play(); audioPlaying = true; updatePlayUI(); } catch(e){}
+  try {
+    userInteracted = true;
+    await playCurrent();
+  } catch (e) {
+    showToast("Click to enable audio first");
+  }
   // spawn a big confetti burst
-  spawnConfetti(innerWidth/2, innerHeight*0.25, 160 + intensity*28, Math.PI*1.6);
+  spawnConfetti(innerWidth / 2, innerHeight * 0.25, 160 + intensity * 28, Math.PI * 1.6);
   // spawn fireworks
-  spawnFirework(rand(120, innerWidth-120), rand(80, innerHeight*0.35), 24 + Math.round(intensity*3));
+  spawnFirework(rand(120, innerWidth - 120), rand(80, innerHeight * 0.35), 24 + Math.round(intensity * 3));
   // spawn balloons
-  spawnBalloons(3 + Math.round(intensity*1.6));
+  spawnBalloons(3 + Math.round(intensity * 1.6));
   // small UI effect
   document.querySelector('.title').animate([{ transform: 'scale(1)' }, { transform: 'scale(1.04)' }, { transform: 'scale(1)' }], { duration: 700, easing: 'ease-out' });
   // shaking subtitle
-  $('#subtitle').animate([{transform:'translateY(0)'},{transform:'translateY(-6px)'},{transform:'translateY(0)'}], { duration:800, easing:'ease-out' });
+  $('#subtitle').animate([{ transform: 'translateY(0)' }, { transform: 'translateY(-6px)' }, { transform: 'translateY(0)' }], { duration: 800, easing: 'ease-out' });
+  showToast('Happy Birthday! 🎉');
 });
 
 /* balloon release */
-$('#balloonReleaseBtn').addEventListener('click', ()=>{
-  spawnBalloons(6 + Math.round(intensity*2));
+$('#balloonReleaseBtn').addEventListener('click', () => {
+  spawnBalloons(6 + Math.round(intensity * 2));
+  showToast('Balloons released! 🎈');
 });
 
 /* party mode toggle */
-$('#partyModeBtn').addEventListener('click', ()=>{
+let ambientInterval = null;
+$('#partyModeBtn').addEventListener('click', () => {
   const btn = $('#partyModeBtn');
   const on = btn.getAttribute('aria-pressed') === 'true';
-  if (on){
-    btn.setAttribute('aria-pressed','false'); btn.textContent = 'Party Mode: Off'; stopAmbient();
+  if (on) {
+    btn.setAttribute('aria-pressed', 'false');
+    btn.textContent = 'Party Mode: Off';
+    stopAmbient();
+    showToast('Party mode off');
   } else {
-    btn.setAttribute('aria-pressed','true'); btn.textContent = 'Party Mode: On'; startAmbient();
+    btn.setAttribute('aria-pressed', 'true');
+    btn.textContent = 'Party Mode: On';
+    startAmbient();
+    showToast('Party mode on! 🎊');
   }
 });
 
 /* background change */
-$('#bgChangeBtn').addEventListener('click', ()=>{ changeBackground(); });
+$('#bgChangeBtn').addEventListener('click', () => {
+  changeBackground();
+});
 
 /* more confetti */
-$('#moreConfettiBtn').addEventListener('click', ()=>{ spawnConfetti(rand(80,innerWidth-80), rand(60, innerHeight*0.4), 160 + intensity*30, Math.PI*1.9); });
+$('#moreConfettiBtn').addEventListener('click', () => {
+  spawnConfetti(rand(80, innerWidth - 80), rand(60, innerHeight * 0.4), 160 + intensity * 30, Math.PI * 1.9);
+  showToast('Confetti blast! ✨');
+});
 
 /* spawn many balloons */
-$('#spawnManyBalloonBtn').addEventListener('click', ()=>{ spawnBalloons(12 + Math.round(intensity*6)); });
+$('#spawnManyBalloonBtn').addEventListener('click', () => {
+  spawnBalloons(12 + Math.round(intensity * 6));
+  showToast('Balloon party! 🎈');
+});
 
 /* fireworks button */
-$('#fireworksBtn').addEventListener('click', ()=>{ for (let i=0;i<4;i++){ spawnFirework(rand(120,innerWidth-120), rand(80, innerHeight*0.45), 28 + Math.round(intensity*2)); } });
+$('#fireworksBtn').addEventListener('click', () => {
+  for (let i = 0; i < 4; i++) {
+    spawnFirework(rand(120, innerWidth - 120), rand(80, innerHeight * 0.45), 28 + Math.round(intensity * 2));
+  }
+  showToast('Fireworks! 🎆');
+});
 
 /* title click surprise */
-$('#greetingTitle').addEventListener('click', ()=>{
-  alert('🎂 Happy Birthday, Pratik Bhadwe! Wishing you a lit year ahead!');
+$('#greetingTitle').addEventListener('click', () => {
+  const messages = [
+    "🎂 Happy Birthday, Pratik Bhadwe! Wishing you a lit year ahead!",
+    "🎁 May your day be filled with joy and laughter!",
+    "✨ Another year older, wiser, and more amazing!",
+    "🥳 Cheers to you on your special day!",
+    "🎊 Hope your birthday is as fantastic as you are!"
+  ];
+  const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+  showToast(randomMessage, 3000);
+  
+  // Visual effect
   $('#greetingTitle').style.color = '#24c6dc';
+  setTimeout(() => {
+    $('#greetingTitle').style.color = '';
+  }, 1000);
 });
 
 /* keyboard accessibility shortcuts */
-document.addEventListener('keydown', (e)=>{
-  if (e.key === ' ' && document.activeElement === document.body){
+document.addEventListener('keydown', (e) => {
+  if (e.key === ' ' && document.activeElement === document.body) {
     e.preventDefault();
     $('#celebrateBtn').click();
   }
   if (e.key.toLowerCase() === 'b') $('#balloonReleaseBtn').click();
   if (e.key.toLowerCase() === 'f') $('#fireworksBtn').click();
+  if (e.key.toLowerCase() === 'm') $('#muteAllBtn').click();
+  if (e.key.toLowerCase() === 'p') $('#partyModeBtn').click();
 });
 
 /* ---- ambient confetti when party mode on ---- */
-let ambientInterval = null;
-function startAmbient(){
+function startAmbient() {
   if (ambientInterval) return;
-  ambientInterval = setInterval(()=>{ spawnConfetti(rand(80,innerWidth-80), rand(innerHeight*0.05, innerHeight*0.35), rndInt(8,28)); }, Math.max(400, 1400 - intensity*80));
+  ambientInterval = setInterval(() => {
+    spawnConfetti(rand(80, innerWidth - 80), rand(innerHeight * 0.05, innerHeight * 0.35), rndInt(8, 28));
+  }, Math.max(400, 1400 - intensity * 80));
 }
-function stopAmbient(){ if (ambientInterval){ clearInterval(ambientInterval); ambientInterval = null; } }
+
+function stopAmbient() {
+  if (ambientInterval) {
+    clearInterval(ambientInterval);
+    ambientInterval = null;
+  }
+}
 
 /* ---- periodic checks to keep loops running ---- */
-setInterval(()=>{
+setInterval(() => {
   if (confettiParticles.length && !confettiRunning) runConfettiLoop();
   if (fxParticles.length && !fxRunning) runFxLoop();
 }, 600);
@@ -779,44 +1246,50 @@ setInterval(()=>{
 /* small touch spawn for mobile */
 window.addEventListener('touchstart', (ev) => {
   const t = ev.touches[0];
-  spawnConfetti(t.clientX, t.clientY, 36, Math.PI*1.3);
+  spawnConfetti(t.clientX, t.clientY, 36, Math.PI * 1.3);
 });
 
 /* ---- helpers & bootstrap ---- */
-function init(){
+function init() {
   setTrackLabel();
   // set initial background index 0
   changeBackground(0);
   // initial balloons cluster
   spawnBalloons(8);
   // tiny confetti to make it alive
-  spawnConfetti(innerWidth/2, innerHeight*0.18, 26, Math.PI*1.1);
+  spawnConfetti(innerWidth / 2, innerHeight * 0.18, 26, Math.PI * 1.1);
   // set volume from UI
   const v = parseFloat($('#volumeRange').value);
   playlist.forEach(p => p.el.volume = v);
-  // hide audio tracks that are empty: if src is placeholder, they may 404; keep UI robust
-  playlist.forEach((p, idx) => {
-    try{
-      const s = p.el.getAttribute('src') || '';
-      if (!s || s.trim().length < 6){ /* mark track label accordingly */ p.label = `Track ${idx+1} (add audio)`; }
-    } catch(e){}
-  });
-  setTrackLabel();
   // set share link if possible
-  try { $('#shareLink').value = location.href; } catch(e){}
+  try {
+    $('#shareLink').value = location.href;
+  } catch (e) {}
+  // Update intensity UI
+  updateIntensityUI();
+  
+  // Add initial user interaction requirement message
+  showToast("Click anywhere to enable audio features", 3000);
 }
 init();
 
+/* Enable audio on first user interaction */
+document.body.addEventListener('click', function enableAudio() {
+  userInteracted = true;
+  document.body.removeEventListener('click', enableAudio);
+  showToast("Audio enabled! 🎵", 1500);
+}, { once: true });
+
 /* small polyfills & safety */
-(function safety(){
+(function safety() {
   // Ensure audio elements won't throw on unavailable sources
   playlist.forEach(p => {
-    p.el.addEventListener('error', (ev) => { console.warn('Audio error for', p.label); });
+    p.el.addEventListener('error', (ev) => {
+      console.warn('Audio error for', p.label);
+      showToast(`Error loading ${p.label}. Check file URL.`);
+    });
   });
 })();
 </script>
 </body>
 </html>
-
-
-
